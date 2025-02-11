@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function() {
             vee24.site = site;
         }
     }
-    fetch("/partials/menu.html")
+    fetch("./partials/menu.html")
         .then(response => response.text())
         .then(data => {
             document.getElementById("menu-container").innerHTML = data;
@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function() {
         })
         .catch(error => console.error("Error loading menu:", error));
 
-    fetch("/partials/content.html")
+    fetch("./partials/content.html")
         .then(response => response.text())
         .then(data => {
             document.getElementById("content-container").innerHTML = data;
