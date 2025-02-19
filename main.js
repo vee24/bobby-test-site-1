@@ -1,5 +1,7 @@
-function loadDiscoJS() {
+function loadDiscoJS(isEngagementPage = false) {
     console.log("Load DiscoJS");
+
+    window.vee24EngagementPage = isEngagementPage;
     window.vee24TagKey = '6e75e527-24df-46e8-914f-dc38a5eb1a60';
     const discoJS = document.createElement('script'); // Use document.createElement('script')
     discoJS.src = "https://cdn.vee24.com/disco.min.js";
