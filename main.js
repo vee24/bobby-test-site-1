@@ -131,6 +131,7 @@ function startPeriodicPageRefresh(reloadRateMS) {
 }
 
 function toggleEmbeddedChat() {
+     if (!vee24) return;
     console.warn('toggleEmbeddedChat', vee24.embeddedChat);
     vee24.embeddedChat = !vee24.embeddedChat;
     updateEmbeddedChatButton();
@@ -143,6 +144,7 @@ function updateEmbeddedChatButton() {
 }
 
 function callHelpMeApi() {
+     if (!vee24) return;
     const pageToLog = get('#page-to-log-input').value;
     const sectionToLog = get('#section-to-log-input').value;
     const input = (pageToLog.length === 0 && sectionToLog.length === 0) ? '' : JSON.stringify({ pageToLog: pageToLog, sectionToLog: sectionToLog });
@@ -151,6 +153,7 @@ function callHelpMeApi() {
 }
 
 function callRequestEngagement() {
+     if (!vee24) return;
     console.warn('callRequestEngagement');
     const params = {
         requestEngagement: {
