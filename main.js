@@ -142,13 +142,13 @@ function toggleEmbeddedChat() {
 function updateEmbeddedChatButton() {
     if (!vee24) return;
     console.warn('updateEmbeddedChatButton', vee24.embeddedChat);
-    get('#toggle-embedded-chat-btn').innerHTML = 'Embedded Chat ' + ((vee24.embeddedChat) ? 'ON' : 'OFF');
+    get('#toggle-embedded-chat-btn')?.innerHTML = 'Embedded Chat ' + ((vee24.embeddedChat) ? 'ON' : 'OFF');
 }
 
 function callHelpMeApi() {
      if (!vee24) return;
-    const pageToLog = get('#page-to-log-input').value;
-    const sectionToLog = get('#section-to-log-input').value;
+    const pageToLog = get('#page-to-log-input')?.value;
+    const sectionToLog = get('#section-to-log-input')?.value;
     const input = (pageToLog.length === 0 && sectionToLog.length === 0) ? '' : JSON.stringify({ pageToLog: pageToLog, sectionToLog: sectionToLog });
     console.warn('callHelpMeApi', input);
     vee24.api.helpMe(input);
