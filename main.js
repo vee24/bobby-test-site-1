@@ -25,7 +25,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
     window.v24ClientInitialise = () => {
-        updateEmbeddedChatButton();
+        setTimeout(() => {
+            updateEmbeddedChatButton();
+        }, 2000);
         
         if (debugModeButton) {
             debugModeButton.addEventListener("click", function () {
