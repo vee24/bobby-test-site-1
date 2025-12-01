@@ -75,8 +75,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Auto-start periodic reload when ?reload=1 is present on any page
     const _urlParams = new URLSearchParams(window.location.search);
-    if (_urlParams.get("reload") === "1") {
-        startPeriodicPageRefresh();
+    const reloadRate = parseInt(_urlParams.get("reload") ?? 0);
+    console.warn('reloadRate', reloadRate);
+    if (reloadRate > 0) {
+        startPeriodicPageRefresh(reloadRate);
     }
 });
 
@@ -113,15 +115,19 @@ function displayObjectProperties(obj, containerId) {
 }
 
 let windowReloadId = null;
-function startPeriodicPageRefresh() {
+function startPeriodicPageRefresh(reloadRateMS) {
     // Prevent multiple intervals
     if (windowReloadId) {
         console.warn('startPeriodicPageRefresh already running');
         return;
     }
 
+    if (reloadRateMS < 1000) {
+        reloadRateMS = 1000; // Minimum 1 second
+    }
+
     console.warn('startPeriodicPageRefresh');
-    windowReloadId = window.setInterval(() => window.location.reload(), 1000);
+    windowReloadId = window.setInterval(() => window.location.reload(), reloadRateMS);
 }
 
 function toggleEmbeddedChat() {
