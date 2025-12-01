@@ -25,6 +25,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
     window.v24ClientInitialise = () => {
+        vee24.traceEnabled = true;
+        
         if (debugModeButton) {
             debugModeButton.addEventListener("click", function () {
                 debugModeButton.style.display = debugModeButton.style.display === "none" ? "block" : "none";
@@ -51,6 +53,7 @@ document.addEventListener("DOMContentLoaded", function() {
             vee24.site = site;
         }
     }
+
     fetch("./partials/menu.html")
         .then(response => response.text())
         .then(data => {
@@ -100,4 +103,30 @@ function displayObjectProperties(obj, containerId) {
     }
 
     container.innerHTML = iterate(obj);
+}
+
+let windowReloadId = null;
+function startPeriodicPageRefresh() {
+    console.warn('startPeriodicPageRefresh');
+    windowReloadId = window.setInterval(() => window.location.reload(), 1000);
+    get('#start-reload-btn').disabled = true;
+    get('#stop-reload-btn').disabled = false;
+}
+
+function stopPeriodicPageRefresh() {
+    console.warn('stopPeriodicPageRefresh');
+    window.clearInterval(windowReloadId);
+    windowReloadId = null;
+    get('#start-reload-btn').disabled = false;
+    get('#stop-reload-btn').disabled = true;
+}
+
+function toggleEmbeddedChat() {
+    console.warn('toggleEmbeddedChat', vee24.embeddedChat);
+    vee24.embeddedChat = !vee24.embeddedChat;
+    get('#toggle-embedded-chat-btn').innerHTML = 'Embedded Chat ' + ((vee24.embeddedChat) ? 'ON' : 'OFF');
+}
+
+function get(selector) {
+    return document.querySelector(selector);
 }
