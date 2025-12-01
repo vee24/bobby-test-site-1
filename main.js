@@ -152,9 +152,11 @@ function callHelpMeApi() {
 function callRequestEngagement() {
     console.warn('callRequestEngagement');
     const params = {
-        connectionMode: 114, //veechat
-        engagementLaunchOrigin: 4 //button
-    }
+        requestEngagement: {
+            connectionMode: 114, //veechat
+            engagementLaunchOrigin: 4 //button
+        }
+    };
     vee24.api.helpMe(JSON.stringify(params));
 }
 
