@@ -25,7 +25,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
     window.v24ClientInitialise = () => {
-        vee24.traceEnabled = true;
         updateEmbeddedChatButton();
         
         if (debugModeButton) {
@@ -53,6 +52,15 @@ document.addEventListener("DOMContentLoaded", function() {
         if (site) {
             vee24.site = site;
         }
+
+        // Auto-start periodic reload when ?reload=1 is present on any page
+        const reloadRate = parseInt(urlParams.get("reload") ?? 0);
+        console.warn('reloadRate', reloadRate);
+        if (reloadRate > 0) {
+            startPeriodicPageRefresh(reloadRate);
+        }
+
+        vee24.traceEnabled = urlParams.get('trace') === '1';
     }
 
     fetch("./partials/menu.html")
@@ -73,13 +81,7 @@ document.addEventListener("DOMContentLoaded", function() {
         })
         .catch(error => console.error("Error loading menu:", error));
 
-    // Auto-start periodic reload when ?reload=1 is present on any page
-    const _urlParams = new URLSearchParams(window.location.search);
-    const reloadRate = parseInt(_urlParams.get("reload") ?? 0);
-    console.warn('reloadRate', reloadRate);
-    if (reloadRate > 0) {
-        startPeriodicPageRefresh(reloadRate);
-    }
+
 });
 
 function displayObjectProperties(obj, containerId) {
