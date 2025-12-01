@@ -141,6 +141,23 @@ function updateEmbeddedChatButton() {
     get('#toggle-embedded-chat-btn').innerHTML = 'Embedded Chat ' + ((vee24.embeddedChat) ? 'ON' : 'OFF');
 }
 
+function callHelpMeApi() {
+    const pageToLog = get('#page-to-log-input').value;
+    const sectionToLog = get('#section-to-log-input').value;
+    const input = (pageToLog.length === 0 && sectionToLog.length === 0) ? '' : JSON.stringify({ pageToLog: pageToLog, sectionToLog: sectionToLog });
+    console.warn('callHelpMeApi', input);
+    vee24.api.helpMe(input);
+}
+
+function callRequestEngagement() {
+    console.warn('callRequestEngagement');
+    const params = {
+        connectionMode: 114, //veechat
+        engagementLaunchOrigin: 4 //button
+    }
+    vee24.api.helpMe(JSON.stringify(params));
+}
+
 function get(selector) {
     return document.querySelector(selector);
 }
