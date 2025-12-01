@@ -71,6 +71,12 @@ document.addEventListener("DOMContentLoaded", function() {
             document.getElementById("content-container").innerHTML = data;
         })
         .catch(error => console.error("Error loading menu:", error));
+
+    // Auto-start periodic reload when ?reload=1 is present on any page
+    const _urlParams = new URLSearchParams(window.location.search);
+    if (_urlParams.get("reload") === "1") {
+        startPeriodicPageRefresh();
+    }
 });
 
 function displayObjectProperties(obj, containerId) {
@@ -107,18 +113,14 @@ function displayObjectProperties(obj, containerId) {
 
 let windowReloadId = null;
 function startPeriodicPageRefresh() {
+    // Prevent multiple intervals
+    if (windowReloadId) {
+        console.warn('startPeriodicPageRefresh already running');
+        return;
+    }
+
     console.warn('startPeriodicPageRefresh');
     windowReloadId = window.setInterval(() => window.location.reload(), 1000);
-    get('#start-reload-btn').disabled = true;
-    get('#stop-reload-btn').disabled = false;
-}
-
-function stopPeriodicPageRefresh() {
-    console.warn('stopPeriodicPageRefresh');
-    window.clearInterval(windowReloadId);
-    windowReloadId = null;
-    get('#start-reload-btn').disabled = false;
-    get('#stop-reload-btn').disabled = true;
 }
 
 function toggleEmbeddedChat() {
