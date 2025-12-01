@@ -26,6 +26,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     window.v24ClientInitialise = () => {
         vee24.traceEnabled = true;
+        updateEmbeddedChatButton();
         
         if (debugModeButton) {
             debugModeButton.addEventListener("click", function () {
@@ -126,6 +127,11 @@ function startPeriodicPageRefresh() {
 function toggleEmbeddedChat() {
     console.warn('toggleEmbeddedChat', vee24.embeddedChat);
     vee24.embeddedChat = !vee24.embeddedChat;
+    updateEmbeddedChatButton();
+}
+
+function updateEmbeddedChatButton() {
+    console.warn('updateEmbeddedChatButton', vee24.embeddedChat);
     get('#toggle-embedded-chat-btn').innerHTML = 'Embedded Chat ' + ((vee24.embeddedChat) ? 'ON' : 'OFF');
 }
 
