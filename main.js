@@ -142,7 +142,7 @@ function toggleEmbeddedChat() {
 function updateEmbeddedChatButton() {
     if (!vee24) return;
     console.warn('updateEmbeddedChatButton', vee24.embeddedChat);
-    get('#toggle-embedded-chat-btn')?.innerHTML = 'Embedded Chat ' + ((vee24.embeddedChat) ? 'ON' : 'OFF');
+    get('#toggle-embedded-chat-btn').innerHTML = 'Embedded Chat ' + ((vee24.embeddedChat) ? 'ON' : 'OFF');
 }
 
 function callHelpMeApi() {
