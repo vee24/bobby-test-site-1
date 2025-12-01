@@ -134,15 +134,15 @@ function startPeriodicPageRefresh(reloadRateMS) {
 
 function toggleEmbeddedChat() {
      if (!vee24) return;
-    console.warn('toggleEmbeddedChat', vee24.embeddedChat);
-    vee24.embeddedChat = !vee24.embeddedChat;
+    console.warn('toggleEmbeddedChat', vee24.useEmbeddedChat);
+    vee24.useEmbeddedChat = !vee24.useEmbeddedChat;
     updateEmbeddedChatButton();
 }
 
 function updateEmbeddedChatButton() {
     if (!vee24) return;
-    console.warn('updateEmbeddedChatButton', vee24.embeddedChat);
-    get('#toggle-embedded-chat-btn').innerHTML = 'Embedded Chat ' + ((vee24.embeddedChat) ? 'ON' : 'OFF');
+    console.warn('updateEmbeddedChatButton', vee24.useEmbeddedChat);
+    get('#toggle-embedded-chat-btn').innerHTML = 'Embedded Chat ' + ((vee24.useEmbeddedChat) ? 'ON' : 'OFF');
 }
 
 function callHelpMeApi() {
