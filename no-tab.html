@@ -15,6 +15,12 @@
 <button id="open-panel-btn">Open Panel</button>
 <script src="main.js"></script>
 <script>
+    window.v24ClientInitialise = function() {
+        console.log('ClientInitialise called');
+        vee24.culture = 'de';
+    }
+</script>
+<script>
 
 const btn = document.querySelector('#open-panel-btn');
 if (btn) {
