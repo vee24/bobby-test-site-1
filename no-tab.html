@@ -1,0 +1,44 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Test Site</title>
+</head>
+
+<body>
+<div id="menu-container"></div>
+<div id="debug-container"></div>
+<p>No Tab</p>
+<div id="content-container"></div>
+<button id="open-panel-btn">Open Panel</button>
+<script src="main.js"></script>
+<script>
+
+const btn = document.querySelector('#open-panel-btn');
+if (btn) {
+    btn.addEventListener('click', onBtnClick);
+} else {
+    console.warn('Open panel button not found');
+}
+
+function onBtnClick() {
+    // Check if vee24 API is available
+    if (typeof vee24 === 'undefined' || !vee24.api) {
+        console.error('vee24 API not available.');
+        return;
+    }
+    
+    try {
+        vee24.api.helpMeNow();
+        console.log('Help panel opened');
+    } catch (error) {
+        console.error('Failed to open help panel:', error);
+    }
+}
+
+</script>
+</body>
+
+</html>
