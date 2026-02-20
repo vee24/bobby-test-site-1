@@ -12,7 +12,7 @@
 <script>
 
     // 1. Define a mapping of URL path strings to their respective tag keys
-    var REGION_CONFIG = {
+    var V24_REGION_CONFIG = {
         "/au-en/": "e232f41b-edb4-41e6-be79-34c7a36b0cc5",
         "/uk-en/": "d906bbde-aa97-42d1-b64d-9823ac2518d7"
         // Easily add new regions here in the future
@@ -23,11 +23,11 @@
         var activeKey = null;
 
         // 2. Loop through the config to see if the current path matches any region
-        for (var regionPath in REGION_CONFIG) {
-            if (REGION_CONFIG.hasOwnProperty(regionPath)) {
+        for (var regionPath in V24_REGION_CONFIG) {
+            if (V24_REGION_CONFIG.hasOwnProperty(regionPath)) {
                 if (path.indexOf(regionPath) !== -1) {
                     console.log("Vee24 Disco: Matched region path:", regionPath);
-                    activeKey = REGION_CONFIG[regionPath];
+                    activeKey = V24_REGION_CONFIG[regionPath];
                     break;
                 }
             }
