@@ -1,12 +1,36 @@
 function loadDiscoJS(isEngagementPage = false) {
     console.log("Load DiscoJS");
-
     window.vee24EngagementPage = isEngagementPage;
+    loadDiscoEnvironment('6e75e527-24df-46e8-914f-dc38a5eb1a60');
+}
+
+function loadDiscoEnvironment(tagKey) {
+    console.log("Load Disco Environment with Tag Key:", tagKey);
+    window.vee24TagKey = tagKey;
+    appendDiscoJSToBody();
+}
+
+function appendDiscoJSToBody() {
     window.vee24TagKey = '6e75e527-24df-46e8-914f-dc38a5eb1a60';
-    const discoJS = document.createElement('script'); // Use document.createElement('script')
+    const discoJS = document.createElement('script');
     discoJS.src = "https://cdn.vee24.com/disco.min.js";
     discoJS.defer = true;
     document.body.appendChild(discoJS);
+}
+
+function loadDiscoJSConditionally() {
+    var ausRegionTagKey = 'e232f41b-edb4-41e6-be79-34c7a36b0cc5';
+    var ukRegionTagKey = 'd906bbde-aa97-42d1-b64d-9823ac2518d7';
+
+    var locationPathName = window.location.pathname;
+    var isAusRegion = locationPathName.includes("/au-en/");
+    console.log("Location Path Name:", locationPathName, "Is AU Region:", isAusRegion);
+    
+    if (isAusRegion) {
+        loadDiscoEnvironment(ausRegionTagKey);
+    } else {
+        loadDiscoEnvironment(ukRegionTagKey);
+    }
 }
 
 function loadZendeskJS() {

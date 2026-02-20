@@ -1,0 +1,58 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angara Conditional Disco JS Load</title>
+</head>
+
+<body>
+<h1>Angara Aus</h1>
+<script>
+
+    // 1. Define a mapping of URL path strings to their respective tag keys
+    var REGION_CONFIG = {
+        "/au-en/": "e232f41b-edb4-41e6-be79-34c7a36b0cc5",
+        "/uk-en/": "d906bbde-aa97-42d1-b64d-9823ac2518d7"
+        // Easily add new regions here in the future
+    };
+
+    function loadDiscoJSConditionally() {
+        var path = window.location.pathname;
+        var activeKey = null;
+
+        // 2. Loop through the config to see if the current path matches any region
+        for (var regionPath in REGION_CONFIG) {
+            if (REGION_CONFIG.hasOwnProperty(regionPath)) {
+                if (path.indexOf(regionPath) !== -1) {
+                    console.log("Vee24 Disco: Matched region path:", regionPath);
+                    activeKey = REGION_CONFIG[regionPath];
+                    break;
+                }
+            }
+        }
+
+        // 3. Stop execution if no region is matched
+        if (!activeKey) {
+            console.warn("Vee24 Disco: Region not identified, skipping script load.");
+            return; 
+        }
+
+        console.log("Vee24 Disco: Loading script for region with tag key:", activeKey);
+
+        // 4. Set the global variable and inject the script
+        window.vee24TagKey = activeKey;
+        
+        var discoJS = document.createElement('script');
+        discoJS.src = "https://cdn.vee24.com/disco.min.js";
+        discoJS.defer = true;
+        document.body.appendChild(discoJS);
+    }
+
+    loadDiscoJSConditionally();
+
+</script>
+</body>
+
+</html>
